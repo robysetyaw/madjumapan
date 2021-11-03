@@ -17,20 +17,19 @@ class CreateItemsTable extends Migration
             $table->id();
 
             
-            $table->unsignedBigInteger('gudang_id');
+            $table->unsignedBigInteger('gudang_id')->nullable();
             $table->foreign('gudang_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('supplier_id')->nullable();
             $table->foreign('supplier_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('users');
           
 
             $table->string("item_name");
             $table->decimal("item_weight");
-            $table->integer( 'item_buy_price');
-            $table->integer( 'item_sell_price');
+            $table->integer( 'item_price');
             $table->string("status");
             $table->timestamps();
         });

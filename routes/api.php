@@ -24,8 +24,8 @@ Route::namespace('api')->group(function () {
     Route::post('login', [UserController::class, 'login']);
 
     Route::post(
-        'gudang/user_gudang/insert',
-        [GudangController::class, 'insert_item_for_gudang_user']
+        'gudang/insert',
+        [GudangController::class, 'insert_item']
     )->middleware('auth:sanctum');
 
 });

@@ -2,29 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gudang;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class GudangController extends Controller
 {
-    public function insert_item_for_gudang_user(Request $request)
+    public function insert_item(Request $request)
     {
-        $gudang_id = $request->gudang_id;
-        
-        $supplier_id = $request->supplier_id;
 
-        $customer_id = $request->customer_id;
+        $user = $request->user();
+        if ($user->is_gudang === 1 || $user->is_admin === 1) {
 
-        $item_name = $request->item_name;
-        $item_weight = $request->item_weight;
-        $item_buy_price = $request->item_buy_price;
-        $item_sell_price = $request->item_sell_price;
-        $status = $request->status;
-
-
-        $context = [
-            'user' => $request->user('api')
-        ];
-        $status = 200;
-        return response($context,$status);
+            $item = Item::insert_item($request);
+            $context = [
+                'status' => 'success',
+                'message' => [
+                    'data' => $item
+                ]
+            ];
+            $status = 201;
+            return response($context, $status);
+        } else {
+            $context = [
+                'status' => 'failed',
+                'message' => 'invalid credential',
+                // 'debug' => $user
+            ];
+            $status = 403;
+            return response($context, $status);
+        }
     }
+
+    // public function testAPI(Request $request)
+    // {
+    //     $items = Item::get_out_transaction();
+    //     $context = [
+    //         'status' => 'success',
+    //         'message' => [
+    //             'data' => $items
+    //         ]
+    //         ];
+    //     $status = 200;
+    //     return response($context, $status);
+    // }
 }
