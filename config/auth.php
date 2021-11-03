@@ -41,8 +41,8 @@ return [
             'provider' => 'users',
         ],
         'api' => [
-            'driver' => 'simple_token',
-            // 'provider' => 'users',
+            'driver' => 'sanctum',
+            'provider' => 'users',
         ]
     ],
 
