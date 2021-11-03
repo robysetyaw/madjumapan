@@ -31,7 +31,7 @@ class admin_user extends Seeder
             'name' => 'admin',
             'created_at' =>  new Carbon('now'),
             'updated_at' =>  new Carbon('now'),
-            'api_token' => Str::random(60)
+            // 'api_token' => Str::random(60)
         ]);
         // gudang
         DB::table('users')->insert([
@@ -46,7 +46,7 @@ class admin_user extends Seeder
             'name' => 'gudang',
             'created_at' =>  new Carbon('now'),
             'updated_at' =>  new Carbon('now'),
-            'api_token' => Str::random(60)
+            // 'api_token' => Str::random(60)
         ]);
         // supplier
         DB::table('users')->insert([
@@ -61,7 +61,7 @@ class admin_user extends Seeder
             'name' => 'supplier',
             'created_at' =>  new Carbon('now'),
             'updated_at' =>  new Carbon('now'),
-            'api_token' => Str::random(60)
+            // 'api_token' => Str::random(60)
         ]);
         // customer
         DB::table('users')->insert([
@@ -76,7 +76,7 @@ class admin_user extends Seeder
             'name' => 'customer',
             'created_at' =>  new Carbon('now'),
             'updated_at' =>  new Carbon('now'),
-            'api_token' => Str::random(60)
+            // 'api_token' => Str::random(60)
         ]);
         
     }
