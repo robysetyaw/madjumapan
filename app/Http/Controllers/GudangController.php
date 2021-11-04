@@ -34,16 +34,17 @@ class GudangController extends Controller
         }
     }
 
-    // public function testAPI(Request $request)
-    // {
-    //     $items = Item::get_out_transaction();
-    //     $context = [
-    //         'status' => 'success',
-    //         'message' => [
-    //             'data' => $items
-    //         ]
-    //         ];
-    //     $status = 200;
-    //     return response($context, $status);
-    // }
+    public function testAPI(Request $request)
+    {
+        
+        $items = Item::get_transaction($request);
+        $context = [
+            'status' => 'success',
+            'message' => [
+                'data' => $items
+            ]
+            ];
+        $status = 200;
+        return response($context, $status);
+    }
 }

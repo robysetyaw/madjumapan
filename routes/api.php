@@ -28,4 +28,9 @@ Route::namespace('api')->group(function () {
         [GudangController::class, 'insert_item']
     )->middleware('auth:sanctum');
 
+    Route::get(
+        'gudang/get',
+        [GudangController::class, 'testAPI']
+    );
+
 });
