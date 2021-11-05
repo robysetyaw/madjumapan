@@ -34,9 +34,10 @@ class GudangController extends Controller
         }
     }
 
-    public function testAPI(Request $request)
+    public function get_transaction(Request $request)
     {
         
+      
         $items = Item::get_transaction($request);
         $context = [
             'status' => 'success',
