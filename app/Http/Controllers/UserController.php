@@ -15,7 +15,9 @@ class UserController extends Controller
         if ($user == "password invalid" || $user == "username not found") {
             $context = [
                 "status" => "failed",
-                'message' => $user
+                'message' => [
+                    'message_failed' => $user
+                ]
             ];
             $status = 401;
             return response($context, $status);
