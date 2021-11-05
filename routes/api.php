@@ -30,7 +30,7 @@ Route::namespace('api')->group(function () {
 
     Route::get(
         'gudang/get',
-        [GudangController::class, 'testAPI']
-    );
+        [GudangController::class, 'get_transaction']
+    )->middleware('auth:sanctum');
 
 });
