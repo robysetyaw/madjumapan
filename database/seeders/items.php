@@ -86,5 +86,16 @@ class items extends Seeder
             'created_at' =>  new Carbon('now'),
             'updated_at' =>  new Carbon('now'),
         ]);
+
+        DB::table('items')->insert([
+            'gudang_id' => 2,
+            'supplier_id' => 3,
+            'item_name' => "daging",
+            'item_price' => 100,
+            'item_weight' => 22.5,
+            'status' => 'in',
+            'created_at' =>  new Carbon('now'),
+            'updated_at' =>  new Carbon('now'),
+        ]);
     }
 }
