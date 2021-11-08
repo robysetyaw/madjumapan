@@ -61,7 +61,7 @@ class User extends Authenticatable
                 $a = DB::table("personal_access_tokens")
                 ->where("name", '=', $username)
                 ->delete();
-                return $user->createToken($username)->plainTextToken;
+                return $user;
                 
             } else {
                 return "password invalid";

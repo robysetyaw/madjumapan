@@ -23,11 +23,15 @@ class UserController extends Controller
             return response($context, $status);
         }
         else {
-            
+            $token = $user->createToken($username_form)->plainTextToken;
             $context = [
                 "status" => "success",
                 'message' => [
-                    "token" => $user // return token
+                    "token" => $token, // return token
+                    "is_admin" => $user->is_admin,
+                    "is_gudang" => $user->is_gudang,
+                    "is_supplier" => $user->is_supplier,
+                    "is_customer" => $user->is_customer,
                 ]
             ];
             $status = 200;
