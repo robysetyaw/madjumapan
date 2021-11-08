@@ -48,4 +48,17 @@ class GudangController extends Controller
         $status = 200;
         return response($context, $status);
     }
+
+    public function get_stocks(Request $request)
+    {
+        $items = Item::get_stocks($request);
+        $context = [
+            'status' => 'success',
+            'message' => [
+                'data' => $items
+            ]
+            ];
+        $status = 200;
+        return response($context, $status);
+    }
 }

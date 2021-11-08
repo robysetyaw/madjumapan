@@ -17,6 +17,13 @@ class Item extends Model
         return $this->belongsTo(User::class);
     }
 
+    static public function get_stocks(Request $request)
+    {
+        $db = DB::select("SELECT it.item_name AS item_name, COUNT(it.item_name) AS stock FROM items as it 
+        GROUP BY it.item_name");
+        return $db;
+    }
+
     static public function insert_item(Request $request)
     {
         $user = $request->user();

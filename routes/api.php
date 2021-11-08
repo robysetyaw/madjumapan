@@ -29,8 +29,13 @@ Route::namespace('api')->group(function () {
     )->middleware('auth:sanctum');
 
     Route::get(
-        'gudang/get',
+        'gudang/items/transactions',
         [GudangController::class, 'get_transaction']
+    )->middleware('auth:sanctum');
+
+    Route::get(
+        'gudang/items/stocks',
+        [GudangController::class, 'get_stocks']
     )->middleware('auth:sanctum');
 
 });
