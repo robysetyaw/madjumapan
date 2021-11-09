@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+    public function insert_user(Request $request)
+    {
+        $user = User::insert_user($request);
+        $context = [
+            'status' => 'success',
+            'message' => $user
+        ];
+        $status = 201;
+        return response($context, $status);
+    }
     public function login(Request $request)
     {
         $username_form = $request->username;
@@ -15,9 +27,7 @@ class UserController extends Controller
         if ($user == "password invalid" || $user == "username not found") {
             $context = [
                 "status" => "failed",
-                'message' => [
-                    'message_failed' => $user
-                ]
+                'message' => $user
             ];
             $status = 401;
             return response($context, $status);
@@ -37,5 +47,35 @@ class UserController extends Controller
             $status = 200;
             return response($context, $status);
         }
+    }
+
+    public function get_user_names(Request $request)
+    {
+        $role = $request->role;
+        if ($role === "supplier") {
+            $db = DB::select(
+                "SELECT us.username, us.id, us.name FROM users AS us 
+                WHERE us.is_supplier = '1'"
+            );
+        } else if($role ==="customer") {
+            $db = DB::select(
+                "SELECT us.username, us.id,us.name FROM users AS us 
+                WHERE us.is_customer = '1'"
+            );
+        } else if ($role === "gudang") {
+            $db = DB::select(
+                "SELECT us.username, us.id,us.name FROM users AS us 
+                WHERE us.is_gudang = '1' AND us.is_admin='0'"
+            );
+        }
+        
+        $context = [
+            "status" => "success",
+            'message' => [
+                'data' => $db
+            ]
+        ];
+        $status = 200;
+        return response($context, $status);
     }
 }

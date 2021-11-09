@@ -24,6 +24,16 @@ Route::namespace('api')->group(function () {
     Route::post('login', [UserController::class, 'login']);
 
     Route::post(
+        "users/insert",
+        [UserController::class, 'insert_user']
+    )->middleware('auth:sanctum');
+
+    Route::get(
+        'users/names',
+        [UserController::class, 'get_user_names']
+    )->middleware('auth:sanctum');
+
+    Route::post(
         'gudang/insert',
         [GudangController::class, 'insert_item']
     )->middleware('auth:sanctum');
@@ -38,4 +48,13 @@ Route::namespace('api')->group(function () {
         [GudangController::class, 'get_stocks']
     )->middleware('auth:sanctum');
 
+    Route::get(
+        'gudang/items/names',
+        [GudangController::class, 'get_item_names']
+    )->middleware('auth:sanctum');
+
+    Route::get(
+        'gudang/items/weight',
+        [GudangController::class, 'get_item_weight']
+    )->middleware('auth:sanctum');
 });

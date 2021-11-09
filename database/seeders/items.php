@@ -18,6 +18,23 @@ class items extends Seeder
         
         $this->memasukkan_barang_ke_gudang();
         $this->mengeluarkan_barang();
+       
+
+        DB::table('item_names')->insert([
+            'item_name' => "lidah",
+            'created_at' =>  new Carbon('now'),
+            'updated_at' =>  new Carbon('now'),
+        ]);
+        DB::table('item_names')->insert([
+            'item_name' => "daging",
+            'created_at' =>  new Carbon('now'),
+            'updated_at' =>  new Carbon('now'),
+        ]);
+        DB::table('item_names')->insert([
+            'item_name' => "daging plus",
+            'created_at' =>  new Carbon('now'),
+            'updated_at' =>  new Carbon('now'),
+        ]);
     }
 
     public function mengeluarkan_barang()
