@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Str;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -54,13 +54,13 @@ class User extends Authenticatable
 
     static public function insert_user(Request $request)
     {
-        $name = $request->name;
-        $email = $request->email;
+        $name = $request->name ?? $request->username;
+        $email = $request->email ?? Str::random(20);;
         $username = $request->username;
-        $is_admin = $request->is_admin;
-        $is_gudang = $request->is_gudang;
-        $is_customer = $request->is_customer;
-        $is_supplier = $request->is_supplier;
+        $is_admin = $request->is_admin ?? 0;
+        $is_gudang = $request->is_gudang ?? 0 ;
+        $is_customer = $request->is_customer ?? 0;
+        $is_supplier = $request->is_supplier ?? 0;
         $created_at = new Carbon("now");
         $updated_at =  new Carbon("now");
         $password = $request->password;
