@@ -14,7 +14,7 @@ class UserController extends Controller
         $user = User::insert_user($request);
         $context = [
             'status' => 'success',
-            'message' => $user
+            'message' => $user // return true
         ];
         $status = 201;
         return response($context, $status);
