@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GudangController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -56,5 +57,15 @@ Route::namespace('api')->group(function () {
     Route::get(
         'gudang/items/weight',
         [GudangController::class, 'get_item_weight']
+    )->middleware('auth:sanctum');
+
+    Route::post(
+        'transactions/insert',
+        [TransactionController::class, 'insert_transactions']
+    )->middleware('auth:sanctum');
+
+    Route::post(
+        'transactions/get',
+        [TransactionController::class, 'get_transactions']
     )->middleware('auth:sanctum');
 });

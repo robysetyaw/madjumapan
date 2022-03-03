@@ -56,6 +56,7 @@ class Transaction extends Model
         $item = DB::select("SELECT item_price FROM items itm 
         LEFT JOIN transactions trx ON itm.transactions_id=trx.id
         WHERE transactions_id=$id;");
+        return $item;
 
         if ($payment < $item ) {
             $status = 0;
