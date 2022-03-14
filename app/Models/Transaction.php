@@ -19,7 +19,7 @@ class Transaction extends Model
 
     static public function get_transactions(Request $request)
     {
-        $db = DB::select("SELECT DISTINCT trx.id,payment,customer_id,us.name,status 
+        $db = DB::select("SELECT trx.id,payment,customer_id,us.name,status 
         FROM transactions trx LEFT JOIN users us ON trx.customer_id=us.id;");
         return $db;
     }
@@ -51,23 +51,23 @@ class Transaction extends Model
         $payment = DB::select("SELECT cash FROM payments pay 
         LEFT JOIN transactions trx ON pay.transactions_id=trx.id
         WHERE transactions_id=$id;");
-        return $payment;
+        $cash = $payment[0]->cash;
 
         $item = DB::select("SELECT item_price FROM items itm 
         LEFT JOIN transactions trx ON itm.transactions_id=trx.id
         WHERE transactions_id=$id;");
-        return $item;
+        $itemPrice = $item[0]->item_price;
 
-        if ($payment < $item ) {
+        if ($cash < $itemPrice ) {
             $status = 0;
         }else{
             $status = 1;
         }
-        return $status;
+        // return $status;
 
         $transaction = DB::table('post')
                         ->where($id)
-                        ->update(['payment' => $payment,
+                        ->update(['payment' => $cash,
                                     'status' => $status]);
         return $transaction;
     }
