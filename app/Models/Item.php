@@ -40,6 +40,10 @@ class Item extends Model
     {
         $user = $request->user();
 
+        $transactions_id = DB::select("SELECT id FROM transactions ORDER BY id DESC LIMIT 1;");
+        $id = $transactions_id[0]->id;
+        
+
         $item_name = $request->item_name;
         $item_weight = $request->item_weight;
         $item_price = $request->item_price;
@@ -71,8 +75,12 @@ class Item extends Model
                 }
             }
             $item->status = $status;
+            $item->transactions_id = $id;
             $item->save();
-            return $item;
+
+            $update_transaction = Transaction::update_transaction($id);
+
+            return $update_transaction;
         }
     }
 

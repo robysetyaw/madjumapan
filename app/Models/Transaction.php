@@ -46,8 +46,6 @@ class Transaction extends Model
 
     static public function update_transaction($id)  
     {
-        $transaction = Transaction::find($id);
-        
         $payment = DB::select("SELECT cash FROM payments pay 
         LEFT JOIN transactions trx ON pay.transactions_id=trx.id
         WHERE transactions_id=$id;");
@@ -63,7 +61,6 @@ class Transaction extends Model
         }else{
             $status = 1;
         }
-        // return $status;
 
         $transaction = DB::table('post')
                         ->where($id)
