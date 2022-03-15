@@ -64,8 +64,18 @@ Route::namespace('api')->group(function () {
         [TransactionController::class, 'insert_transactions']
     )->middleware('auth:sanctum');
 
-    Route::post(
+    Route::get(
         'transactions/get',
         [TransactionController::class, 'get_transactions']
+    )->middleware('auth:sanctum');
+
+    Route::get(
+        'transactions/byCustomer/get',
+        [TransactionController::class, 'get_transactions_by_id_customer']
+    )->middleware('auth:sanctum');
+
+     Route::get(
+        'transactions/byId/get',
+        [TransactionController::class, 'get_transactions_by_id']
     )->middleware('auth:sanctum');
 });

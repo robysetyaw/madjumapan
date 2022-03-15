@@ -68,4 +68,26 @@ class Transaction extends Model
                                     'status' => $status]);
         return $transaction;
     }
+
+    static public function get_transactions_by_id_customer(Request $request)
+    {
+        $per_person_id = $request->per_person_id;
+
+        $db = DB::select("SELECT trx.id,(CASE WHEN trx.status=1 THEN 'LUNAS' ELSE 'BELUM LUNAS' END) as status,
+                        it.item_name,it.item_weight,it.created_at FROM transactions trx
+                        LEFT JOIN items it on trx.id=it.transactions_id WHERE trx.customer_id='$per_person_id'");
+
+        return $db;
+    }
+
+    static public function get_transaction_by_id(Request $request)
+    {
+        $transaction_id= $request->transaction_id;
+
+        $db = DB::select("SELECT trx.*,(CASE WHEN trx.status=1 THEN 'LUNAS' ELSE 'BELUM LUNAS' END) as status,
+                        it.* FROM transactions trx
+                        LEFT JOIN items it on trx.id=it.transactions_id WHERE trx.id='$transaction_id'");
+
+        return $db;
+    }
 }

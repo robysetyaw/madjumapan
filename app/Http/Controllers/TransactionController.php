@@ -57,4 +57,32 @@ class TransactionController extends Controller
         $status = 200;
         return response($context, $status);
     }
+
+    public function get_transactions_by_id_customer(Request $request)
+    {
+
+        $transactions = Transaction::get_transactions_by_id_customer($request);
+        $context = [
+            'status' => 'success',
+            'message' => [
+                'data' => $transactions
+            ]
+        ];
+        $status = 200;
+        return response($context, $status);
+    }
+
+        public function get_transactions_by_id(Request $request)
+    {
+
+        $transactions = Transaction::get_transactions_by_id($request);
+        $context = [
+            'status' => 'success',
+            'message' => [
+                'data' => $transactions
+            ]
+        ];
+        $status = 200;
+        return response($context, $status);
+    }
 }
